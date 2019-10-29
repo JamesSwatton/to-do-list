@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadEvents();
 });
 
+let tasks = [];
 
 function loadEvents() {
     // console.log(document.querySelector('form'));
@@ -18,10 +19,18 @@ function submit(event) {
 }
 
 function addTask(task) {
+    tasks.push(task);
     let ul = document.querySelector('ul');
-    let taskListItem = document.createElement('li');
-    taskListItem.innerHTML = `<span class="delete">×</span><input type="checkbox"><label>${task}</label>`;;
-    ul.appendChild(taskListItem);
+    ul.innerHTML = '';
+    renderTaskList(ul, tasks);
+}
+
+function renderTaskList(ul, taskArr) {
+    for (task of taskArr) {
+        let taskListItem = document.createElement('li');
+        taskListItem.innerHTML = `<span class="delete">×</span><input type="checkbox"><label>${task}</label>`;
+        ul.appendChild(taskListItem);
+    }
 }
 
 function clearList() {
