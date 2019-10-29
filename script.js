@@ -7,7 +7,7 @@ let tasks = [];
 function loadEvents() {
     document.querySelector('form').addEventListener('submit', submit);
     document.querySelector('#clear').addEventListener('click', clearList);
-    document.querySelector('ul').addEventListener('click', deletOrTick);
+    document.querySelector('ul').addEventListener('click', deleteOrTick);
 }
 
 function submit(event) {
@@ -17,9 +17,13 @@ function submit(event) {
 }
 
 function addTask(task) {
-    priorityChecked();
-    tasks.push(task);
+    let priority = document.querySelector('#priority');
     let ul = document.querySelector('ul');
+    if (priority.checked) {
+        tasks.unshift(task);
+    } else {
+        tasks.push(task);
+    }
     ul.innerHTML = '';
     renderTaskList(ul, tasks);
 }
@@ -32,18 +36,11 @@ function renderTaskList(ul, taskArr) {
     }
 }
 
-function priorityChecked() {
-    let priority = document.querySelector('#priority');
-    if (priority.checked) {
-        console.log('priority checked');
-    }
-}
-
 function clearList() {
     document.querySelector('ul').innerHTML = '';
 }
 
-function deletOrTick(event) {
+function deleteOrTick(event) {
     if (event.target.className == 'delete') {
         deleteTask(event);
     } else {
