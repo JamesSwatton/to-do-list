@@ -7,6 +7,7 @@ function loadEvents() {
     // console.log(document.querySelector('form'));
     document.querySelector('form').addEventListener('submit', submit);
     document.querySelector('#clear').addEventListener('click', clearList);
+    document.querySelector('ul').addEventListener('click', deletOrTick);
 }
 
 function submit(event) {
@@ -25,4 +26,26 @@ function addTask(task) {
 
 function clearList() {
     document.querySelector('ul').innerHTML = '';
+}
+
+function deletOrTick(event) {
+    if (event.target.className == 'delete') {
+        deleteTask(event);
+    } else {
+        tickTask(event);
+    }
+}
+
+function deleteTask(event) {
+    console.log(event.target);
+    let taskToRemove = event.target.parentNode;
+    let parent = taskToRemove.parentNode;
+    parent.removeChild(liToRemove);
+}
+
+function tickTask(event) {
+    let task = event.target.nextSibling;
+    if (event.target.checked) {
+        task.style.textDecoration = "line-through";
+    }
 }
