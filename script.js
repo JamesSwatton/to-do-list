@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 let tasks = [];
 
 function loadEvents() {
-    // console.log(document.querySelector('form'));
     document.querySelector('form').addEventListener('submit', submit);
     document.querySelector('#clear').addEventListener('click', clearList);
     document.querySelector('ul').addEventListener('click', deletOrTick);
@@ -14,11 +13,11 @@ function loadEvents() {
 function submit(event) {
     event.preventDefault();
     let task = event.target.task.value;
-    console.log(task);
     addTask(task);
 }
 
 function addTask(task) {
+    priorityChecked();
     tasks.push(task);
     let ul = document.querySelector('ul');
     ul.innerHTML = '';
@@ -30,6 +29,13 @@ function renderTaskList(ul, taskArr) {
         let taskListItem = document.createElement('li');
         taskListItem.innerHTML = `<span class="delete">×</span><input type="checkbox"><label>${task}</label>`;
         ul.appendChild(taskListItem);
+    }
+}
+
+function priorityChecked() {
+    let priority = document.querySelector('#priority');
+    if (priority.checked) {
+        console.log('priority checked');
     }
 }
 
