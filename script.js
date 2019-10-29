@@ -40,12 +40,14 @@ function deleteTask(event) {
     console.log(event.target);
     let taskToRemove = event.target.parentNode;
     let parent = taskToRemove.parentNode;
-    parent.removeChild(liToRemove);
+    parent.removeChild(taskToRemove);
 }
 
 function tickTask(event) {
     let task = event.target.nextSibling;
     if (event.target.checked) {
         task.style.textDecoration = "line-through";
+    } else {
+        task.style.textDecoration = "none";
     }
 }
