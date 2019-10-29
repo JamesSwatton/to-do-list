@@ -12,7 +12,7 @@ function loadEvents() {
 function submit(event) {
     event.preventDefault();
     let task = event.target.task.value;
-    addTask(task);
+    if (task) { addTask(task); }
 }
 
 function addTask(task) {
